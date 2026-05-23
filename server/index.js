@@ -11,20 +11,9 @@ dotenv.config({ path: join(__dirname, '..', '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const allowedOrigins = [
-  'https://shiyoujingchu.vercel.app',
-  'http://localhost:5173',
-];
 
 const corsOptions = {
-  origin(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-      return;
-    }
-
-    callback(new Error(`CORS origin not allowed: ${origin}`));
-  },
+  origin: '*',
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 204,
