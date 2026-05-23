@@ -12,7 +12,6 @@ dotenv.config({ path: join(__dirname, '..', '.env') });
 const app = express();
 const PORT = process.env.PORT || 3001;
 const allowedOrigins = [
-  'https://shiyoujingchu-5828bcfki-whh0502s-projects.vercel.app',
   'https://shiyoujingchu.vercel.app',
   'http://localhost:5173',
 ];
