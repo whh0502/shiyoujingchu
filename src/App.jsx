@@ -7,13 +7,9 @@ import RecommendedQuestions from './components/RecommendedQuestions';
 import FeatureCards from './components/FeatureCards';
 import FeatureModal from './components/FeatureModal';
 import InputBox from './components/InputBox';
+import { chatWithBackend } from './lib/api';
 
 const ERROR_MSG = '本诗仙暂时醉倒了，请稍后再问。';
-
-function cleanAnswer(text) {
-  if (!text) return text;
-  return text.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
-}
 
 export default function App() {
   const [messages, setMessages] = useState([]);
@@ -98,24 +94,10 @@ export default function App() {
     setMessages((prev) => [...prev, userMsg]);
     setIsLoading(true);
     try {
-      const response = await fetch('/api/chat-messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${import.meta.env.VITE_DIFY_API_KEY}`,
-        },
-        body: JSON.stringify({
-          inputs: {},
-          query: text.trim(),
-          response_mode: 'blocking',
-          user: 'shiyou-jingchu-web',
-        }),
-      });
-      if (!response.ok) throw new Error('Request failed');
-      const data = await response.json();
+      const data = await chatWithBackend(text);
       const aiMsg = {
         id: ++lastMessageIdRef.current,
-        text: cleanAnswer(data.answer) || ERROR_MSG,
+        text: data.answer || ERROR_MSG,
         isUser: false,
         isNew: true,
       };

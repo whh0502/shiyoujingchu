@@ -1,12 +1,8 @@
 import { useState, useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { chatWithBackend } from '../lib/api';
 
 const ERROR_MSG = '本诗仙暂时醉倒了，请稍后再问。';
-
-function cleanAnswer(text) {
-  if (!text) return text;
-  return text.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
-}
 
 const poems = [
   { text: '故人西辞黄鹤楼，烟花三月下扬州。', author: '李白', title: '黄鹤楼送孟浩然之广陵' },
@@ -92,24 +88,8 @@ export default function FeatureModal({ feature, onClose }) {
     setLoading(true);
     setResult(null);
     try {
-      const res = await fetch('/api/chat-messages',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${import.meta.env.VITE_DIFY_API_KEY}`,
-          },
-          body: JSON.stringify({
-            inputs: {},
-            query,
-            response_mode: 'blocking',
-            user: 'shiyou-jingchu-web',
-          }),
-        },
-      );
-      if (!res.ok) throw new Error('Request failed');
-      const data = await res.json();
-      setResult(cleanAnswer(data.answer) || ERROR_MSG);
+      const data = await chatWithBackend(query);
+      setResult(data.answer || ERROR_MSG);
     } catch {
       setResult(ERROR_MSG);
     } finally {
