@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', serif;
+  color: #16243A;
+  background: #f5f2eb;
+  overflow-x: hidden;
+  min-height: 100vh;
+  width: 100vw;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100vw;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(180, 156, 120, 0.25);
+  border-radius: 2px;
+}
+
+/* Typewriter */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.cursor-blink::after {
+  content: '|';
+  animation: blink 0.8s step-end infinite;
+  color: #5a9e82;
+}
+
+/* === Background animations === */
+
+@keyframes mistDriftH {
+  0%, 100% { transform: translateX(0%) scale(1); }
+  50% { transform: translateX(3%) scale(1.04); }
+}
+
+@keyframes mistDriftV {
+  0%, 100% { transform: translateY(0%) scale(1); }
+  50% { transform: translateY(-2%) scale(1.03); }
+}
+
+@keyframes mistRise {
+  0%, 100% { opacity: 0.25; transform: translateY(0); }
+  50% { opacity: 0.5; transform: translateY(-6px); }
+}
+
+@keyframes foregroundMist {
+  0%, 100% { opacity: 0.42; transform: translateX(0) translateY(0) scale(1); }
+  50% { opacity: 0.72; transform: translateX(6%) translateY(-8px) scale(1.05); }
+}
+
+@keyframes waterRipple {
+  0%, 100% { opacity: 0.28; transform: translateX(0); }
+  50% { opacity: 0.58; transform: translateX(18px); }
+}
+
+@keyframes inkWelcome {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(18px) scale(0.98);
+  }
+  28% {
+    opacity: 0.32;
+  }
+  72% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(-8px) scale(1.01);
+  }
+}
+
+@keyframes inkWelcomeHold {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(18px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Gold particle float */
+@keyframes goldFloat {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  20% { opacity: 0.7; }
+  80% { opacity: 0.4; }
+  100% { transform: translateY(-80px) translateX(25px); opacity: 0; }
+}
+
+/* Mountain cloud drift */
+@keyframes mountainMist {
+  0%, 100% { opacity: 0.35; transform: translateX(0); }
+  50% { opacity: 0.55; transform: translateX(3%); }
+}
+
+/* === UI animations === */
+
+@keyframes softBreathe {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.95; transform: scale(1.03); }
+}
+
+@keyframes poemDrift {
+  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+  10% { opacity: 0.5; }
+  85% { opacity: 0.28; }
+  100% { transform: translateY(-8vh) translateX(12px); opacity: 0; }
+}
+
+@keyframes goldShimmer {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.75; }
+}
+
+/* Input box breathing glow */
+@keyframes inputGlow {
+  0%, 100% { box-shadow: 0 10px 40px rgba(201,168,106,0.08), inset 0 1px 0 rgba(255,255,255,0.5); }
+  50% { box-shadow: 0 10px 50px rgba(201,168,106,0.16), inset 0 1px 0 rgba(255,255,255,0.6); }
+}
+
+/* Li Bai poem emergence */
+@keyframes poemEmerge {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 0.45; transform: translateY(0); }
+}
+
+@keyframes poemEmergeFloat {
+  0%, 100% { opacity: 0; transform: translateY(12px); }
+  18%, 78% { opacity: 0.45; }
+  48% { opacity: 0.58; transform: translateY(-8px); }
+}
